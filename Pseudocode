@@ -1,0 +1,22 @@
+DECLARE PACKAGE_PRICE = 99.0
+DECLARE DISCOUNT_THRESHOLDS = [10, 20, 50, 100]
+DECLARE DISCOUNT_RATES = [0.2, 0.3, 0.4, 0.5]
+
+READ name
+READ quantity
+
+cost = quantity * PACKAGE_PRICE
+
+FOR i FROM 0 TO LENGTH(DISCOUNT_THRESHOLDS) - 1
+    IF quantity >= DISCOUNT_THRESHOLDS[i] THEN
+        discount = cost * DISCOUNT_RATES[i]
+        BREAK
+    END IF
+END FOR
+
+total_cost = cost - discount
+
+PRINT "Units Sold: " + quantity
+PRINT "Cost: $" + cost formatted with 2 decimal places
+PRINT "Discount: $" + discount formatted with 2 decimal places
+PRINT "Total Cost: $" + total_cost formatted with 2 decimal places
